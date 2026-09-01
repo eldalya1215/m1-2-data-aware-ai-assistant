@@ -1,0 +1,10 @@
+.env
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+firebase-service-account*.json
+serviceAccountKey.json
+dist/
+.vercel/
+*.log

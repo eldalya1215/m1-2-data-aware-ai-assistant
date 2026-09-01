@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="내 시계열 데이터를 이해하는 AI 분석 비서">
+  <title>AirData AI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#">AirData <span>AI</span></a>
+    <div class="top-actions">
+      <span id="api-status" class="status">API 확인 중</span>
+      <button id="theme-toggle" class="icon-button" type="button" aria-label="다크 모드 전환">◐</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <aside class="sidebar card">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Conversation</p>
+          <h2>대화 기록</h2>
+        </div>
+        <button id="new-chat" class="small-button" type="button">새 대화</button>
+      </div>
+      <div id="conversation-list" class="conversation-list" aria-live="polite"></div>
+    </aside>
+
+    <section class="workspace">
+      <section class="hero card">
+        <div>
+          <p class="eyebrow">Your data, understood</p>
+          <h1>내 데이터를 아는<br><span>AI 분석 비서</span></h1>
+          <p>144개월의 국제선 승객 흐름을 근거로 답하고, 데이터와 대화를 한곳에서 관리합니다.</p>
+        </div>
+        <div id="summary-grid" class="summary-grid" aria-live="polite"></div>
+      </section>
+
+      <section class="content-grid">
+        <section class="chat-panel card">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Context-aware chat</p>
+              <h2>데이터에게 질문하기</h2>
+            </div>
+            <span class="cold-start">첫 응답은 최대 1분 걸릴 수 있어요</span>
+          </div>
+          <div id="messages" class="messages" aria-live="polite">
+            <div class="message assistant">안녕하세요. 저장된 항공 승객 데이터를 바탕으로 답변할게요. “최근 추세가 어때?”처럼 질문해보세요.</div>
+          </div>
+          <form id="chat-form" class="chat-form">
+            <label class="sr-only" for="chat-input">질문</label>
+            <input id="chat-input" maxlength="2000" placeholder="데이터에 관해 질문하세요" required>
+            <button type="submit">전송</button>
+          </form>
+          <div id="chat-loading" class="loading hidden"><span></span><span></span><span></span> 데이터를 읽고 있어요</div>
+        </section>
+
+        <section class="chart-panel card">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Trend</p>
+              <h2>최근 데이터 흐름</h2>
+            </div>
+            <a id="csv-export" class="small-button" href="#">CSV 내보내기</a>
+          </div>
+          <canvas id="trend-chart" width="800" height="350" aria-label="최근 데이터 추세 그래프"></canvas>
+        </section>
+      </section>
+
+      <section class="data-panel card">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Data management</p>
+            <h2>데이터 관리</h2>
+          </div>
+          <span id="data-count" class="badge"></span>
+        </div>
+        <form id="data-form" class="data-form">
+          <input id="data-id" type="hidden">
+          <label>날짜<input id="data-date" type="date" required></label>
+          <label>값 (천 명)<input id="data-value" type="number" min="0" step="0.01" required></label>
+          <label class="memo-field">메모<input id="data-memo" maxlength="300" placeholder="선택 입력"></label>
+          <button id="data-submit" type="submit">추가</button>
+          <button id="data-cancel" class="secondary hidden" type="button">취소</button>
+        </form>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>날짜</th><th>값</th><th>메모</th><th>관리</th></tr></thead>
+            <tbody id="data-table"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="config.js"></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
